@@ -65,13 +65,13 @@ namespace Lesson1
             Console.WriteLine("Name: {0}, surname: {1}, age: {2}, height: {3:F}, weight: {4:F}", name, surname, age, height, weight);
             // With $ sign:
             Console.WriteLine($"Name: {name}, surname: {surname}, age: {age}, height: {height:F}, weight: {weight:F}");
-            Console.WriteLine("Press ENTER to get task 2");
-            Console.ReadLine();
+            Study.Print("Press ENTER to get task 2");
+            Study.Pause();
 
             Console.WriteLine("Task 2 ===================================================================================================");
             Console.WriteLine("Your mass index is: {0:F}", MassIndex(weight, height));
-            Console.WriteLine("Press ENTER to get task 3");
-            Console.ReadLine();
+            Study.Print("Press ENTER to get task 3");
+            Study.Pause();
         }
 
         static float MassIndex(float m, float h)
@@ -95,8 +95,8 @@ namespace Lesson1
             y2 = CheckNumber();
 
             Console.WriteLine("Distance between coordinates is: {0:F}", CalculateDist(x1,y1,x2,y2));
-            Console.WriteLine("Press ENTER to get task 4");
-            Console.ReadLine();
+            Study.Print("Press ENTER to get task 4");
+            Study.Pause();
         }
 
         static double CalculateDist(double x1, double y1, double x2, double y2)
@@ -165,8 +165,8 @@ namespace Lesson1
             me.city = "Ufa";
             me.PrintPerson();
 
-            Console.WriteLine("Press ENTER to quit");
-            Console.ReadLine();
+            Study.Print("Press ENTER to quit");
+            Study.Pause();
         }
         #endregion
     }
@@ -200,9 +200,4 @@ namespace Lesson1
             Console.ReadKey();
         }
     }
-
-
-
-
-
 }
