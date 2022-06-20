@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,8 @@ namespace IvanUtils
         {
             PrintInMid($"Homework #{lessonNum}");
             PrintInMid($"made by Afanasev Ivan\n");
+            Console.WriteLine("Press any key to go to menu\n");
+            Console.ReadKey();
         }
 
         public static int Menu(int taskCount)
@@ -47,7 +50,7 @@ namespace IvanUtils
         }
     }
 
-        public class GetNumbers
+    public class GetNumbers
         {
             public static int GetIntFromKey(string numStr)
             {
@@ -88,5 +91,217 @@ namespace IvanUtils
                 return sum;
             }
         }
+
+    public class MyArray
+    {
+
+        #region Private Fields
+        private int[] _array;
+        #endregion
+
+        #region Public Properties
+        public int this[int index]
+        {
+            get
+            {
+                return _array[index];
+            }
+            set
+            {
+                _array[index] = value;
+            }
+        }
+
+        public int[] fullArr
+        {
+            get
+            {
+                return _array;
+            }
+        }
+
+        public int Sum
+        {
+            get
+            {
+                int sum = 0;
+                for (int i = 0; i < _array.Length; i++)
+                    sum += _array[i];
+                return sum;
+            }
+        }
+
+        public int MaxCount
+        {
+            get
+            {
+                Array.Sort(_array); // сортировать не обязательно, но так мы сразу будем знать, что максимаьные значения в конце
+                int max = _array[_array.Length - 1];
+                int maxCount = 0;
+                for (int i = _array.Length - 1; i >= 0; i--)
+                {
+                    if (_array[i] == max)
+                        maxCount++;
+                    else
+                        return maxCount;
+                }
+                return maxCount; // в этом необходимости нет, всё равно не отработает, но без него компилятор ругается
+            }
+        }
+
+        public int Length
+        {
+            get
+            {
+                return _array.Length;
+            }
+        }
+        #endregion
+
+        #region Constructors
+        public MyArray(int[] array)
+        {
+            _array = array;
+        }
+
+        public MyArray(int count)
+        {
+            _array = new int[count];
+            Random random = new Random();
+            for (int i = 0; i < count; i++)
+            {
+                _array[i] = random.Next(-10000, 10001);
+            }
+        }
+
+        public MyArray(string fileName)
+        {
+            _array = LoadArrayFromFile(fileName);
+        }
+
+        public MyArray(int begin, int size, int step)
+        {
+            _array = new int[size];
+            _array[0] = begin;
+            for (int i = 1; i < size; i++)
+            {
+                _array[i] = _array[i - 1] + step;
+            }
+
+        }
+        #endregion
+
+        #region Public Methods
+        public void PrintArr()
+        {
+            for (int i = 0; i < _array.Length; i++)
+            {
+                Console.Write($"{_array[i]}\t");
+            }
+            Console.WriteLine();
+        }
+
+        public override string ToString()
+        {
+            string buf = "";
+            for (int i = 0; i < _array.Length; i++)
+            {
+                buf += $"{_array[i]}\t";
+            }
+            return buf;
+        }
+
+        public static int FindPairs(int[] arr)
+        {
+            int pairs = 0;
+            for (int i = 0; i < arr.Length - 1; i++)
+            {
+                if ((arr[i] % 3 == 0 && arr[i + 1] % 3 != 0) || (arr[i] % 3 != 0 && arr[i + 1] % 3 == 0))
+                {
+                    pairs++;
+                }
+            }
+            return pairs;
+        }
+
+        public static int[] LoadArrayFromFile(string fileName)
+        {
+            if (!File.Exists(fileName))
+                throw new FileNotFoundException();
+
+            int[] buf = new int[1000];
+
+            StreamReader streamReader = new StreamReader(fileName);
+
+            int counter = 0;
+            while (!streamReader.EndOfStream)
+            {
+                buf[counter] = int.Parse(streamReader.ReadLine());
+                counter++;
+            }
+
+            int[] arr = new int[counter];
+            Array.Copy(buf, arr, counter);
+            streamReader.Close();
+            return arr;
+        }
+
+        public static string[] LoadLoginPassFromFile(string fileName)
+        {
+            if (!File.Exists(fileName))
+                throw new FileNotFoundException();
+
+            string[] buf = new string[1000];
+
+            StreamReader streamReader = new StreamReader(fileName);
+
+            int counter = 0;
+            while (!streamReader.EndOfStream)
+            {
+                buf[counter] = streamReader.ReadLine();
+                counter++;
+            }
+
+            string[] arr = new string[counter];
+            Array.Copy(buf, arr, counter);
+            streamReader.Close();
+            return arr;
+        }
+
+        public int[] Inverse()
+        {
+            int[] temp = new int[_array.Length];
+            Array.Copy(_array, temp, _array.Length);
+            for (int i = 0; i < temp.Length; i++)
+                temp[i] = -temp[i];
+            return temp;
+        }
+
+        public void Multi(int mult)
+        {
+            for (int i = 0; i < _array.Length; i++)
+                _array[i] *= mult;
+        }
+        #endregion
+
+        public void CountEements()
+        {
+            Dictionary<int, int> elements = new Dictionary<int, int>();
+            for (int i = 0; i < _array.Length; i++)
+            {
+                int res;
+                if (elements.TryGetValue(_array[i], out res))
+                    elements[_array[i]] += 1;
+                else
+                    elements.Add(_array[i], 1);
+            }
+            
+            foreach (var j in elements)
+            {
+                Console.Write($"/element: {j.Key}, amount: {j.Value}/ \t");
+            }
+            Console.WriteLine();
+        }
     }
+}
 
