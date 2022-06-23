@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -88,5 +89,30 @@ namespace IvanUtils
                 return sum;
             }
         }
+
+    public class GetArray
+    {
+        public static int[] LoadArrayFromFile(string fileName)
+        {
+            if (!File.Exists(fileName))
+                throw new FileNotFoundException();
+
+            int[] buf = new int[1000];
+
+            StreamReader streamReader = new StreamReader(fileName);
+
+            int counter = 0;
+            while (!streamReader.EndOfStream)
+            {
+                buf[counter] = int.Parse(streamReader.ReadLine());
+                counter++;
+            }
+
+            int[] arr = new int[counter];
+            Array.Copy(buf, arr, counter);
+            streamReader.Close();
+            return arr;
+        }
     }
+}
 

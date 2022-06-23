@@ -1,0 +1,18 @@
+﻿15
+Oakenshield Thorin 5 4 5
+Dwarv Balin 4 4 3
+Dwarv Dawlin 3 3 4
+Dwarv Bifur 3 5 4
+Dwarv Bofur 4 4 4
+Dwarv Bombur 5 4 3
+Dwarv Dori 3 3 4
+Dwarv Nori 4 5 3
+Dwarv Ori 5 3 5
+Dwarv Fili 3 4 4
+Dwarv Kili 5 3 4
+Dwarv Glóin 3 4 3
+Dwarv Óin 3 3 3
+Hobbit Bilbo 3 4 5
+TheGrey Gandalf 5 5 5
+
+
