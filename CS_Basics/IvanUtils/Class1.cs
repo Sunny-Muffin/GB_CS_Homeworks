@@ -76,7 +76,7 @@ namespace IvanUtils
             {
                 int num = 0;
                 while (!int.TryParse(Console.ReadLine(), out num))
-                    Console.WriteLine("Please enter an imteger: ");
+                    Console.WriteLine("Please enter an integer: ");
                 return num;
             }
 
